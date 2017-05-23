@@ -1,5 +1,14 @@
 var express=require('express');
 var app = express();
+
+var os=require('os');
+var cfenv=require('cfenv');
+
+var fs = require('fs');
+
+    var host1 = os.hostname();
+
+
 var port=process.env.PORT || 3000;
 var host=process.env.HOST || 'localhost';
 var mongojs = require('mongojs');
@@ -31,7 +40,9 @@ app.use(function(req, res, next) {
 app.get('/retaillist', function (req, res) {
   console.log('I received a GET request');
  db.retaillist.find(function(err,docs){
- 	console.log(docs);
+		docs[0].host=host1;
+		 	console.log(docs);
+
  	res.json(docs);
  });
   });
@@ -64,6 +75,7 @@ app.put('/retaillist/:id',function(req,res){
       res.json(doc);
 });
 	});
+	
 app.listen(port,function(){
 console.log("app running");
 console.log("your app is runing at "+host+":"+port)
