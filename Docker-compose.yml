@@ -22,12 +22,12 @@ services:
       restart_policy:
         condition: on-failure
     volumes:
-      - mongodbdata:/data/db
+      - mongodata:/data/db
     ports:
       - "27017"
     networks:
       - webnet
 volumes:
-  mongodbdata:
+  mongodata:
     
     
