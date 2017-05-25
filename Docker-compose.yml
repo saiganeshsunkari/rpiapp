@@ -4,7 +4,7 @@ networks:
   webnet:
 services:
   web:
-    image: saiganesh/meanapp
+    image: saiganesh/rpinode
     deploy:
       replicas: 2
       restart_policy:
