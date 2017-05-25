@@ -6,7 +6,7 @@ services:
   web:
     image: saiganesh/rpinode
     deploy:
-      replicas: 2
+      replicas: 1
       restart_policy:
         condition: on-failure      
     ports:
@@ -18,7 +18,7 @@ services:
   mongo:
     image: dhermanns/rpi-mongo
     deploy:
-      replicas: 2
+      replicas: 1
       restart_policy:
         condition: on-failure
     volumes:
