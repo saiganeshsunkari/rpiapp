@@ -1,13 +1,18 @@
-FROM resin/raspberrypi-node:slim
-RUN apt-get update && apt-get install -yq \
-   alsa-utils libasound2-dev && \
-      apt-get clean && rm -rf /var/lib/apt/lists/*
-WORKDIR /usr/src/app
-COPY package.json package.json
-RUN JOBS=MAX npm install --production --unsafe-perm && npm cache clean && rm -rf /tmp/*
-COPY . ./
-ENV INITSYSTEM on
+FROM resin/rpi-raspbian
+
+# install required packages
+RUN apt-get update
+RUN apt-get install -y wget dialog
+
+# install nodejs
+RUN wget http://node-arm.herokuapp.com/node_latest_armhf.deb
+RUN dpkg -i node_latest_armhf.deb
+
+COPY . /src
+RUN cd /src; npm install
+
+# run application
 EXPOSE 8080
-CMD [ "npm", "start" ]
+CMD ["node", "/src/server.js"]
 
 
