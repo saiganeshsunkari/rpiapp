@@ -1,18 +1,9 @@
-FROM resin/rpi-raspbian
-
-# install required packages
-RUN apt-get update
-RUN apt-get install -y wget dialog
-
-# install nodejs
-RUN wget http://node-arm.herokuapp.com/node_latest_armhf.deb
-RUN dpkg -i node_latest_armhf.deb
-
-COPY . /src
-RUN cd /src; npm install
-
-# run application
+FROM hypriot/rpi-node
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY package.json /usr/src/app/
+RUN npm install
+COPY . /usr/src/app
 EXPOSE 8080
-CMD ["node", "/src/server.js"]
-
+CMD [ "npm", "start" ]
 
