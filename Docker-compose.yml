@@ -16,7 +16,7 @@ services:
     networks:
       - webnet
   mongo:
-    image: jixer/rpi-mongo
+    image: dhermanns/rpi-mongo
     deploy:
       replicas: 2
       restart_policy:
