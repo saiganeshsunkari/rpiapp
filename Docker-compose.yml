@@ -4,7 +4,7 @@ networks:
   webnet:
 services:
   web:
-    image: saiganesh/rpinode
+    build: .
     deploy:
       replicas: 1
       restart_policy:
