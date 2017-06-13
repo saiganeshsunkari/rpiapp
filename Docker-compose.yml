@@ -16,7 +16,7 @@ services:
     networks:
       - webnet
   mongo:
-    image: jixer/rpi-mongo
+    image: cretzel/rpi-mongodb
     deploy:
       replicas: 1
       restart_policy:
