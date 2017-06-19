@@ -1,18 +1,17 @@
 version: "3"
-
 networks:
   webnet:
 services:
   web:
-    image: saiganesh/rpisample   
+    image: saiganesh/rpisample
+    depends_on:
+      - mongo
     deploy:
       replicas: 1
       restart_policy:
         condition: on-failure      
     ports:
       - "80:3000"
-    depends_on:
-      - mongo
     networks:
       - webnet
   mongo:
@@ -22,12 +21,12 @@ services:
       restart_policy:
         condition: on-failure
     volumes:
-      - mongodata:/data/db
+      - mongodb:/data/db
     ports:
       - "27017:27017"
     networks:
       - webnet
 volumes:
-  mongodata:
+  mongodb:
     
     
